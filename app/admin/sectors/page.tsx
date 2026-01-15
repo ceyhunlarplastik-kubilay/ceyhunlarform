@@ -43,6 +43,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { AppBreadcrumb } from "@/components/breadcrumbs/AppBreadcrumb";
 
 interface Sector {
   _id: string;
@@ -321,6 +322,13 @@ export default function AdminSectorsPage() {
 
   return (
     <div className="space-y-6">
+      <AppBreadcrumb
+        items={[
+          { label: "Ana Sayfa", href: "/" },
+          { label: "Admin", href: "/admin" },
+          { label: "Sektörler" },
+        ]}
+      />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Sektörler</h1>

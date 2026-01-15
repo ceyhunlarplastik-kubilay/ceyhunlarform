@@ -16,10 +16,20 @@ export async function GET(req: Request) {
 
         const page = Number(searchParams.get("page")) || 1;
         const search = searchParams.get("search")?.trim() || "";
+        const sector = searchParams.get("sector");
+        const productionGroup = searchParams.get("productionGroup");
+        const province = searchParams.get("province")?.trim() || "";
+        const district = searchParams.get("district")?.trim() || "";
 
         const skip = (page - 1) * LIMIT;
 
-        const filter: any = {};
+        // const filter: any = {};
+        const filter: any = {
+            ...(province && { province }),
+            ...(district && { district }),
+            ...(sector && sector !== "all" && { sectorId: sector }),
+            ...(productionGroup && { productionGroupIds: productionGroup }),
+        };
 
         /* -------------------------------------------------------
            SEARCH MODE (pagination yok)
@@ -56,6 +66,8 @@ export async function GET(req: Request) {
                         req.lastName,
                         req.email,
                         req.phone,
+                        req.province,
+                        req.district,
                         req.address,
                         sector?.name,
                         ...products.map((p) => p.name),
@@ -75,6 +87,8 @@ export async function GET(req: Request) {
                         lastName: req.lastName,
                         email: req.email,
                         phone: req.phone,
+                        province: req.province || "",
+                        district: req.district || "",
                         address: req.address,
                         sector: sector?.name || "",
                         productionGroups: groups.map((g) => g.name).join(", "),
@@ -137,6 +151,8 @@ export async function GET(req: Request) {
                     lastName: req.lastName,
                     email: req.email,
                     phone: req.phone,
+                    province: req.province || "",
+                    district: req.district || "",
                     address: req.address,
                     sector: sector?.name || "",
                     productionGroups: groups.map((g) => g.name).join(", "),

@@ -22,6 +22,8 @@ export interface IRequest extends Document {
     lastName?: string;
     email: string;
     phone: string;
+    province: string;
+    district: string;
     address?: string;
 
     sectorId: mongoose.Types.ObjectId | null;
@@ -39,6 +41,8 @@ const RequestSchema = new Schema<IRequest>(
         lastName: String,
         email: { type: String, required: true },
         phone: { type: String, required: true },
+        province: { type: String, required: true },
+        district: { type: String, required: true },
         address: String,
 
         sectorId: { type: Schema.Types.ObjectId, ref: "Sector", default: null },
@@ -97,6 +101,12 @@ const RequestSchema = new Schema<IRequest>(
     },
     { timestamps: true }
 );
+
+RequestSchema.index({ sectorId: 1 });
+RequestSchema.index({ province: 1 });
+RequestSchema.index({ district: 1 });
+RequestSchema.index({ sectorId: 1, province: 1 });
+RequestSchema.index({ sectorId: 1, province: 1, district: 1 });
 
 
 export const Request =

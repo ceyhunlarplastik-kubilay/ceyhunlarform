@@ -16,7 +16,7 @@ export default async function AdminProductsLayout({
     <div className="min-h-screen bg-gray-50/50">
       <AuthActions />
       <main className="p-6 md:p-8">
-        <div className="max-w-6xl mx-auto space-y-8">{children}</div>
+        <div className="w-full mx-auto space-y-8">{children}</div>
       </main>
     </div>
   );

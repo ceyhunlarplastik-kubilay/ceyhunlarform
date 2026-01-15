@@ -68,6 +68,8 @@ const formSchema = z.object({
       },
       { message: "Geçerli bir telefon numarası giriniz" }
     ),
+  il: z.string().min(1, "İl seçimi zorunludur"),
+  ilce: z.string().min(1, "İlçe seçimi zorunludur"),
   adres: z.string().optional(),
 });
 
@@ -254,6 +256,8 @@ export default function RequestForm3() {
       lastName: data.soyad,
       email: data.email,
       phone: data.telefon,
+      province: data.il,
+      district: data.ilce,
       address: data.adres,
       sectorId: sectorIdToSend,
       products: data.urunler,

@@ -75,6 +75,7 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import { AppBreadcrumb } from "@/components/breadcrumbs/AppBreadcrumb";
 
 /* -------------------------------------------------------------------------- */
 /*                                   TYPES                                    */
@@ -570,6 +571,11 @@ export default function ProductsAdminPage() {
     }
   };
 
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch, selectedSector, selectedGroup]);
+
   /* -------------------------------------------------------------------------- */
   /*                                   RENDER                                   */
   /* -------------------------------------------------------------------------- */
@@ -579,11 +585,19 @@ export default function ProductsAdminPage() {
       {/* HEADER */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
+          <AppBreadcrumb
+            items={[
+              { label: "Ana Sayfa", href: "/" },
+              { label: "Admin", href: "/admin" },
+              { label: "Endüstriyel Ürünler" },
+            ]}
+          />
           <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-            Ürün Yönetimi
+            Endüstriyel Ürün Yönetimi
           </h1>
           <p className="text-muted-foreground mt-1">
-            Kataloğunuzdaki ürünleri filtreleyin, düzenleyin ve yönetin.
+            Kataloğunuzdaki endüstriyel ürünleri filtreleyin, düzenleyin ve
+            yönetin.
           </p>
         </div>
         <Button onClick={openCreateDialog} size="lg" className="shadow-sm">

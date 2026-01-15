@@ -39,6 +39,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { AppBreadcrumb } from "@/components/breadcrumbs/AppBreadcrumb";
 
 /* -------------------------------------------------------------------------- */
 /*                                   TYPES                                    */
@@ -225,6 +226,13 @@ export default function AdminProductionGroupsPage() {
 
   return (
     <div className="space-y-6">
+      <AppBreadcrumb
+        items={[
+          { label: "Ana Sayfa", href: "/" },
+          { label: "Admin", href: "/admin" },
+          { label: "Üretim Grupları" },
+        ]}
+      />
       {/* CREATE / EDIT */}
       <Card>
         <CardHeader>

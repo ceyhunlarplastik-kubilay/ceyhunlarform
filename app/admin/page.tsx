@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { AppBreadcrumb } from "@/components/breadcrumbs/AppBreadcrumb";
 import {
   AlertCircle,
   LayoutDashboard,
@@ -27,6 +28,9 @@ export default async function AdminDashboard() {
     <div className="space-y-8">
       {/* Header */}
       <div>
+        <AppBreadcrumb
+          items={[{ label: "Ana Sayfa", href: "/" }, { label: "Admin" }]}
+        />
         <h1 className="text-3xl font-bold">Admin Paneli</h1>
         <p className="text-muted-foreground mt-2">
           İçerik yönetim sistemine hoş geldiniz. Buradan sektörleri, üretim
@@ -104,11 +108,11 @@ export default async function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Package className="h-6 w-6 text-purple-500" />
-              Ürün Yönetimi
+              Endüstriyel Ürün Yönetimi
             </CardTitle>
             <CardDescription>
-              Üretim gruplarına bağlı ürünleri yönet. Ürün görsellerini buradan
-              ekleyebilirsin.
+              Üretim gruplarına bağlı endüstriyel ürünleri yönet. Ürün
+              görsellerini buradan ekleyebilirsin.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -117,7 +121,7 @@ export default async function AdminDashboard() {
               variant="outline"
               className="w-full border-purple-200 hover:bg-purple-50 hover:text-purple-700"
             >
-              <Link href="/admin/products">Ürünleri Yönet</Link>
+              <Link href="/admin/products">Endüstriyel Ürünleri Yönet</Link>
             </Button>
           </CardContent>
         </Card>

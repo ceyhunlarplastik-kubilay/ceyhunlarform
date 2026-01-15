@@ -24,6 +24,8 @@ export async function POST(req: Request) {
             lastName,
             email,
             phone,
+            province,
+            district,
             address,
             sectorId,
             products, // [{ productId, productionGroupId }]
@@ -33,7 +35,7 @@ export async function POST(req: Request) {
         /* Basic validation                                                    */
         /* ------------------------------------------------------------------ */
 
-        if (!companyName || !email || !phone || !products?.length) {
+        if (!companyName || !email || !phone || !province || !district || !products?.length) {
             return NextResponse.json({ error: "Eksik bilgi" }, { status: 400 });
         }
 
@@ -121,6 +123,8 @@ export async function POST(req: Request) {
             lastName,
             email,
             phone,
+            province,
+            district,
             address,
             sectorId: sectorId || null,
             productionGroupIds,
@@ -162,7 +166,7 @@ export async function POST(req: Request) {
             const { sheets, spreadsheetId } = await getGoogleSheets();
             await sheets.spreadsheets.values.append({
                 spreadsheetId,
-                range: "Response!A:K",
+                range: "Response!A:M",
                 valueInputOption: "USER_ENTERED",
                 requestBody: {
                     values: [
@@ -173,6 +177,8 @@ export async function POST(req: Request) {
                             lastName || "-",
                             email,
                             phone,
+                            province,
+                            district,
                             address || "-",
                             sectorName,
                             groupNames,
@@ -190,7 +196,7 @@ export async function POST(req: Request) {
         /* 7) Email                                                            */
         /* ------------------------------------------------------------------ */
 
-        try {
+        /* try {
             const emailHtml = await render(
                 SampleRequestEmail({
                     companyName,
@@ -215,7 +221,7 @@ export async function POST(req: Request) {
             }
         } catch (mailError) {
             console.error("Email hatası:", mailError);
-        }
+        } */
 
         return NextResponse.json(
             { success: true, data: newRequest },
